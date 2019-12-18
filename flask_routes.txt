@@ -1,0 +1,10 @@
+Flask Routes that my app will require
+
+API
+/RandomRecipe - GET - gets fully random recipe from API
+/NewRecipe - POST - gives ingredients, gets recipe back
+
+DATABASE
+/MyRecipes - GET - pulls all recipes from database associated with an acct 
+/MyRecipe - POST - pulls a particular recipe from database
+/Account - POST - pulls account data from database

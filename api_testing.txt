@@ -1,0 +1,615 @@
+
+INGREDIENT SEARCH
+https://api.spoonacular.com/recipes/findByIngredients?apiKey={api_key}&ingredients={ingredients}&number={number}
+(api_key=token, ingredients='apples,+flour,+sugar', number="1" )
+gives recipe ingredient list but not instructions
+
+[ 
+   { 
+      'id':534573,
+      'title':'Brown Butter Apple Crumble',
+      'image':'https://spoonacular.com/recipeImages/534573-312x231.jpg',
+      'imageType':'jpg',
+      'usedIngredientCount':1,
+      'missedIngredientCount':2,
+      'missedIngredients':[ 
+         { 
+            'id':2010,
+            'amount':0.5,
+            'unit':'tsp',
+            'unitLong':'teaspoons',
+            'unitShort':'tsp',
+            'aisle':'Spices and Seasonings',
+            'name':'cinnamon',
+            'original':'1/2 tsp cinnamon',
+            'originalString':'1/2 tsp cinnamon',
+            'originalName':'cinnamon',
+            'metaInformation':[ 
+
+            ],
+            'image':'https://spoonacular.com/cdn/ingredients_100x100/cinnamon.jpg'
+         },
+         { 
+            'id':8120,
+            'amount':0.5,
+            'unit':'cup',
+            'unitLong':'cups',
+            'unitShort':'cup',
+            'aisle':'Cereal',
+            'name':'oats',
+            'original':'1/2 cup uncooked oats (not instant)',
+            'originalString':'1/2 cup uncooked oats (not instant)',
+            'originalName':'uncooked oats (not instant)',
+            'metaInformation':[ 
+               'uncooked',
+               '(not instant)'
+            ],
+            'image':'https://spoonacular.com/cdn/ingredients_100x100/rolled-oats.jpg'
+         }
+      ],
+      'usedIngredients':[ 
+         { 
+            'id':9003,
+            'amount':4.0,
+            'unit':'',
+            'unitLong':'',
+            'unitShort':'',
+            'aisle':'Produce',
+            'name':'apples',
+            'original':'4 apples, peeled, cored and sliced',
+            'originalString':'4 apples, peeled, cored and sliced',
+            'originalName':'apples, peeled, cored and sliced',
+            'metaInformation':[ 
+               'cored',
+               'peeled',
+               'sliced'
+            ],
+            'image':'https://spoonacular.com/cdn/ingredients_100x100/apple.jpg'
+         }
+      ],
+      'unusedIngredients':[ 
+
+      ],
+      'likes':7
+   }
+]
+
+
+
+COMPLEX SEARCH
+api_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey={api_key}&includeIngredients={ingredients}&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&number={number}"
+get_url = api_url.format(api_key=token, ingredients='carrot,+celery,+onion', number="10" )
+
+{ 
+   'results':[ 
+      { 
+         'vegetarian':True,
+         'vegan':True,
+         'glutenFree':True,
+         'dairyFree':True,
+         'veryHealthy':False,
+         'cheap':False,
+         'veryPopular':False,
+         'sustainable':False,
+         'weightWatcherSmartPoints':17,
+         'gaps':'no',
+         'lowFodmap':False,
+         'ketogenic':False,
+         'whole30':True,
+         'preparationMinutes':115,
+         'cookingMinutes':20,
+         'sourceUrl':'http://www.eatingwell.com/recipes/roasted_chickens.html',
+         'spoonacularSourceUrl':'https://spoonacular.com/roasted-chickens-828705',
+         'aggregateLikes':0,
+         'spoonacularScore':53.0,
+         'healthScore':15.0,
+         'creditsText':'Eating Well',
+         'sourceName':'Eating Well',
+         'pricePerServing':195.43,
+         'id':828705,
+         'title':'Roasted Chickens',
+         'readyInMinutes':135,
+         'servings':16,
+         'image':'https://spoonacular.com/recipeImages/828705-312x231.jpg',
+         'imageType':'jpg',
+         'cuisines':[ ],
+         'dishTypes':[ 
+            'antipasti',
+            'starter',
+            'snack',
+            'appetizer',
+            'antipasto',
+            "hor d'oeuvre"
+         ],
+         'diets':[ 
+            'gluten free',
+            'dairy free',
+            'paleolithic',
+            'lacto ovo vegetarian',
+            'primal',
+            'whole 30',
+            'vegan'
+         ],
+         'occasions':[ ],
+         'winePairing':{ },
+         'analyzedInstructions':[ 
+            { 
+               'name':'',
+               'steps':[ 
+                  { 
+                     'number':1,
+                     'step':'Preheat oven to 450F. Coat a large rimmed baking sheet with cooking spray.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404727,
+                           'name':'baking sheet',
+                           'image':'baking-sheet.jpg'
+                        },
+                        { 
+                           'id':404784,
+                           'name':'oven',
+                           'image':'oven.jpg',
+                           'temperature':{ 
+                              'number':450.0,
+                              'unit':'Fahrenheit'
+                           }
+                        }
+                     ]
+                  },
+                  { 
+                     'number':2,
+                     'step':'Let chickens stand at room temperature for 30 minutes. Thoroughly pat dry with paper towels, inside and out. Gently separate the skin from the meat and season under the skin and inside the cavity with salt and pepper. Tie the legs together with kitchen string, mostly closing the cavity opening. Tuck the wing tips under the chickens.',
+                     'ingredients':[ 
+                        { 
+                           'id':1102047,
+                           'name':'salt and pepper',
+                           'image':'salt-and-pepper.jpg'
+                        }
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404733,
+                           'name':'kitchen twine',
+                           'image':'kitchen-string.jpg'
+                        },
+                        { 
+                           'id':405895,
+                           'name':'paper towels',
+                           'image':'paper-towels.jpg'
+                        }
+                     ],
+                     'length':{ 
+                        'number':30,
+                        'unit':'minutes'
+                     }
+                  },
+                  { 
+                     'number':3,
+                     'step':'Place onion, celery and carrot on the prepared baking sheet.',
+                     'ingredients':[ 
+                        { 
+                           'id':11124,
+                           'name':'carrot',
+                           'image':'sliced-carrot.png'
+                        },
+                        { 
+                           'id':11143,
+                           'name':'celery',
+                           'image':'celery.jpg'
+                        },
+                        { 
+                           'id':11282,
+                           'name':'onion',
+                           'image':'brown-onion.png'
+                        }
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404727,
+                           'name':'baking sheet',
+                           'image':'baking-sheet.jpg'
+                        }
+                     ]
+                  },
+                  { 
+                     'number':4,
+                     'step':'Brush the chickens with oil and set on top of the vegetables, about 2 inches apart.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+
+                     ]
+                  },
+                  { 
+                     'number':5,
+                     'step':'Roast in the center of the oven for 40 minutes. Using tongs and a spatula to help you, rotate each chicken 180 degrees  (so the side facing in is now facing out). Continue roasting until an instant-read thermometer inserted into the thickest part of the thigh, without touching bone, registers at least 165F, 20 to 30 minutes more.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404789,
+                           'name':'kitchen thermometer',
+                           'image':'food-thermometer.jpg'
+                        },
+                        { 
+                           'id':404642,
+                           'name':'spatula',
+                           'image':'spatula-or-turner.jpg'
+                        },
+                        { 
+                           'id':404641,
+                           'name':'tongs',
+                           'image':'tongs.jpg'
+                        },
+                        { 
+                           'id':404784,
+                           'name':'oven',
+                           'image':'oven.jpg',
+                           'temperature':{ 
+                              'number':165.0,
+                              'unit':'Fahrenheit'
+                           }
+                        }
+                     ],
+                     'length':{ 
+                        'number':60,
+                        'unit':'minutes'
+                     }
+                  },
+                  { 
+                     'number':6,
+                     'step':'Tilt each chicken so the juice from the cavity runs onto the pan.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404645,
+                           'name':'frying pan',
+                           'image':'pan.png'
+                        }
+                     ]
+                  },
+                  { 
+                     'number':7,
+                     'step':'Transfer the chickens to a clean cutting board.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+                        { 
+                           'id':404716,
+                           'name':'cutting board',
+                           'image':'cutting-board.jpg'
+                        }
+                     ]
+                  },
+                  { 
+                     'number':8,
+                     'step':'Let rest 15 minutes.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+
+                     ],
+                     'length':{ 
+                        'number':15,
+                        'unit':'minutes'
+                     }
+                  },
+                  { 
+                     'number':9,
+                     'step':'Remove the string before carving.',
+                     'ingredients':[ 
+
+                     ],
+                     'equipment':[ 
+
+                     ]
+                  }
+               ]
+            }
+         ],
+         'usedIngredientCount':3,
+         'missedIngredientCount':0,
+         'likes':0,
+         'missedIngredients':[ 
+
+         ],
+         'usedIngredients':[ 
+            { 
+               'id':11124,
+               'amount':1.0,
+               'unit':'cup',
+               'unitLong':'cup',
+               'unitShort':'cup',
+               'aisle':'Produce',
+               'name':'carrot',
+               'original':'1 cup chopped carrot',
+               'originalString':'1 cup chopped carrot',
+               'originalName':'chopped carrot',
+               'metaInformation':[ 
+                  'chopped'
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/sliced-carrot.png'
+            },
+            { 
+               'id':11143,
+               'amount':1.0,
+               'unit':'cup',
+               'unitLong':'cup',
+               'unitShort':'cup',
+               'aisle':'Produce',
+               'name':'celery',
+               'original':'1 cup chopped celery',
+               'originalString':'1 cup chopped celery',
+               'originalName':'chopped celery',
+               'metaInformation':[ 
+                  'chopped'
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/celery.jpg'
+            },
+            { 
+               'id':11282,
+               'amount':1.0,
+               'unit':'cup',
+               'unitLong':'cup',
+               'unitShort':'cup',
+               'aisle':'Produce',
+               'name':'onion',
+               'original':'1 cup chopped onion',
+               'originalString':'1 cup chopped onion',
+               'originalName':'chopped onion',
+               'metaInformation':[ 
+                  'chopped'
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/brown-onion.png'
+            }
+         ],
+         'unusedIngredients':[ 
+
+         ]
+      }
+   ],
+   'offset':0,
+   'number':1,
+   'totalResults':3074
+}
+
+
+
+ANOTHER COMPLEX SEARCH
+
+{ 
+   'results':[ 
+      { 
+         'vegetarian':True,
+         'vegan':True,
+         'glutenFree':True,
+         'dairyFree':True,
+         'veryHealthy':False,
+         'cheap':False,
+         'veryPopular':False,
+         'sustainable':False,
+         'weightWatcherSmartPoints':7,
+         'gaps':'no',
+         'lowFodmap':False,
+         'ketogenic':False,
+         'whole30':False,
+         'sourceUrl':'http://www.thevintagemixer.com/2013/09/wild-mushroom-buckwheat-kasha-recipe/',
+         'spoonacularSourceUrl':'https://spoonacular.com/wild-mushroom-buckwheat-kasha-509297',
+         'aggregateLikes':36,
+         'spoonacularScore':92.0,
+         'healthScore':32.0,
+         'creditsText':'The Vintage Mixer',
+         'sourceName':'The Vintage Mixer',
+         'pricePerServing':72.68,
+         'id':509297,
+         'title':'Wild Mushroom Buckwheat Kasha',
+         'readyInMinutes':20,
+         'servings':3,
+         'image':'https://spoonacular.com/recipeImages/509297-312x231.jpg',
+         'imageType':'jpg',
+         'cuisines':[ 
+
+         ],
+         'dishTypes':[ 
+            'side dish'
+         ],
+         'diets':[ 
+            'gluten free',
+            'dairy free',
+            'lacto ovo vegetarian',
+            'vegan'
+         ],
+         'occasions':[ 
+
+         ],
+         'winePairing':{ 
+
+         },
+         'analyzedInstructions':[ 
+            { 
+               'name':'',
+               'steps':[ 
+                  { 
+                     'number':1,
+                     'step':'soak dried mushrooms for at least 1 hour in hot water.  Boil in same water for .5-1 hour.Bring buckwheat and 2 1/2 cups water to a boil then simmer for 15 minutes. Meanwhile, sauté onion and mushrooms until onion is golden and soft (about 5 minutes).',
+                     'ingredients':[ 
+                        { 
+                           'id':20008,
+                           'name':'buckwheat',
+                           'image':'raw-buckwheat.jpg'
+                        },
+                        { 
+                           'id':11260,
+                           'name':'mushrooms',
+                           'image':'mushrooms.png'
+                        },
+                        { 
+                           'id':11282,
+                           'name':'onion',
+                           'image':'brown-onion.png'
+                        },
+                        { 
+                           'id':14412,
+                           'name':'water',
+                           'image':'water.png'
+                        }
+                     ],
+                     'equipment':[ 
+
+                     ],
+                     'length':{ 
+                        'number':20,
+                        'unit':'minutes'
+                     }
+                  },
+                  { 
+                     'number':2,
+                     'step':'Mix cooked buckwheat with mushrooms and onion then salt to taste.',
+                     'ingredients':[ 
+                        { 
+                           'id':11260,
+                           'name':'mushrooms',
+                           'image':'mushrooms.png'
+                        },
+                        { 
+                           'id':11282,
+                           'name':'onion',
+                           'image':'brown-onion.png'
+                        },
+                        { 
+                           'id':2047,
+                           'name':'salt',
+                           'image':'salt.jpg'
+                        }
+                     ],
+                     'equipment':[ 
+
+                     ]
+                  }
+               ]
+            }
+         ],
+         'usedIngredientCount':2,
+         'missedIngredientCount':4,
+         'likes':0,
+         'missedIngredients':[ 
+            { 
+               'id':20008,
+               'amount':1.0,
+               'unit':'cup',
+               'unitLong':'cup',
+               'unitShort':'cup',
+               'aisle':'Health Foods',
+               'name':'buckwheat',
+               'original':'1 cup buckwheat',
+               'originalString':'1 cup buckwheat',
+               'originalName':'buckwheat',
+               'metaInformation':[ 
+
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/raw-buckwheat.jpg'
+            },
+            { 
+               'id':4053,
+               'amount':1.0,
+               'unit':'tablespoon',
+               'unitLong':'tablespoon',
+               'unitShort':'Tbsp',
+               'aisle':'Oil, Vinegar, Salad Dressing',
+               'name':'olive oil',
+               'original':'1 tablespoon olive oil',
+               'originalString':'1 tablespoon olive oil',
+               'originalName':'olive oil',
+               'metaInformation':[ 
+
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/olive-oil.jpg'
+            },
+            { 
+               'id':2047,
+               'amount':3.0,
+               'unit':'servings',
+               'unitLong':'servings',
+               'unitShort':'servings',
+               'aisle':'Spices and Seasonings',
+               'name':'salt',
+               'original':'salt',
+               'originalString':'salt',
+               'originalName':'salt',
+               'metaInformation':[ 
+
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/salt.jpg'
+            },
+            { 
+               'id':14412,
+               'amount':2.5,
+               'unit':'cups',
+               'unitLong':'cups',
+               'unitShort':'cup',
+               'aisle':'Beverages',
+               'name':'water',
+               'original':'2 1/2 cups water',
+               'originalString':'2 1/2 cups water',
+               'originalName':'water',
+               'metaInformation':[ 
+
+               ],
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/water.png'
+            }
+         ],
+         'usedIngredients':[ 
+            { 
+               'id':11260,
+               'amount':0.25,
+               'unit':'cup',
+               'unitLong':'cups',
+               'unitShort':'cup',
+               'aisle':'Produce',
+               'name':'mushrooms',
+               'original':'1/4 cup dried forrest mushrooms (or whatever vegetable you have on hand)',
+               'originalString':'1/4 cup dried forrest mushrooms (or whatever vegetable you have on hand)',
+               'originalName':'dried forrest mushrooms (or whatever vegetable you have on hand)',
+               'metaInformation':[ 
+                  'dried',
+                  '(or whatever vegetable you have on hand)'
+               ],
+               'extendedName':'dried mushrooms',
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/mushrooms.png'
+            },
+            { 
+               'id':11282,
+               'amount':0.5,
+               'unit':'',
+               'unitLong':'',
+               'unitShort':'',
+               'aisle':'Produce',
+               'name':'onion',
+               'original':'1/2 onion, diced',
+               'originalString':'1/2 onion, diced',
+               'originalName':'onion, diced',
+               'metaInformation':[ 
+                  'diced'
+               ],
+               'extendedName':'diced onion',
+               'image':'https://spoonacular.com/cdn/ingredients_100x100/brown-onion.png'
+            }
+         ],
+         'unusedIngredients':[ 
+
+         ]
+      }
+   ],
+   'offset':0,
+   'number':1,
+   'totalResults':1886
+}
