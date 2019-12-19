@@ -43,3 +43,6 @@ def get_recipe_by_complex_search():
     else:
         return jsonify({"error": "API error"})
 
+
+if __name__ == "__main__":
+    app.run(debug=True)
