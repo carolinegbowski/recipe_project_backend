@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from random import randint
 import sqlite3
 import requests
 import os
@@ -42,6 +43,37 @@ def get_recipe_by_complex_search():
         return jsonify({"data": res})
     else:
         return jsonify({"error": "API error"})
+
+@app.route('/api/viewRecipe', methods=["POST"])
+def view_recipe():
+    data = request.get_json()
+    recipe_id = data.get('id')
+    api_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey={api_key}&id={recipe_id}&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&ignorePantry=false"
+    get_url = api_url.format(api_key=token, recipe_id=recipe_id)
+    response = requests.get(get_url)
+    if response.status_code == 200:
+        res = response.json()
+        return jsonify({"data": res})
+    else: 
+        return jsonify({"error": "API error"})
+
+@app.route('/api/saveUser', methods=["POST"])
+def saveUser(): 
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    with sqlite3.connect('data.db') as connection: 
+        cursor = connection.cursor()
+        SQL = "SELECT id FROM users WHERE username=? AND password_hash=?;"
+        token = cursor.execute(SQL, (username, password)).fetchone()
+        if token == None: 
+            token = str(randint(1000000000,9999999999))
+            SQL = """INSERT INTO users (username, password_hash, token)
+            VALUES (?,?,?);"""
+            cursor.execute(SQL, (username, password, token))
+        return jsonify({"token": token})
+
+
 
 
 if __name__ == "__main__":

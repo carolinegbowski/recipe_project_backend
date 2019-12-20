@@ -4,10 +4,8 @@ def schema():
     CREATE_SQL_ACCOUNTS = """
     CREATE TABLE accounts(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email_address VARCHAR(50),
-        password_hash VARCHAR(30),
-        first_name VARCHAR(200),
-        last_name VARCHAR(200),
+        username VARCHAR(50),
+        password VARCHAR(30),
         token VARCHAR
     ); """
 
