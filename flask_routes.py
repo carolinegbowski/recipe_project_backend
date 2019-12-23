@@ -44,11 +44,11 @@ def get_recipe_by_complex_search():
     else:
         return jsonify({"error": "API error"})
 
-@app.route('/api/viewRecipe', methods=["POST"])
-def view_recipe():
+@app.route('/api/getIngredients', methods=["POST"])
+def get_ingredients():
     data = request.get_json()
     recipe_id = data.get('id')
-    api_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey={api_key}&id={recipe_id}&instructionsRequired=true&addRecipeInformation=true&fillIngredients=true&ignorePantry=false"
+    api_url = "https://api.spoonacular.com/recipes/{recipe_id}/ingredientWidget.json?apiKey={api_key}"
     get_url = api_url.format(api_key=token, recipe_id=recipe_id)
     response = requests.get(get_url)
     if response.status_code == 200:
@@ -56,6 +56,20 @@ def view_recipe():
         return jsonify({"data": res})
     else: 
         return jsonify({"error": "API error"})
+
+@app.route('/api/getInstructions', methods=["POST"])
+def get_instructions():
+    data = request.get_json()
+    recipe_id = data.get('id')
+    api_url = "https://api.spoonacular.com/recipes/{recipe_id}/analyzedInstructions?apiKey={api_key}"
+    get_url = api_url.format(api_key=token, recipe_id=recipe_id)
+    response = requests.get(get_url)
+    if response.status_code == 200:
+        res = response.json()
+        return jsonify({"data" : res})
+    else: 
+        return jsonify({"error" : "API error"})
+
 
 @app.route('/api/saveUser', methods=["POST"])
 def saveUser(): 
