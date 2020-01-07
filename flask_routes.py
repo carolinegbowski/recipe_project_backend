@@ -87,21 +87,29 @@ def get_instructions():
             return jsonify({"error" : "API error"})
 
 
-@app.route('/api/saveUser', methods=["POST"])
-def saveUser(): 
+@app.route('/api/newUser', methods=["POST"])
+def newUser(): 
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
+    token = str(randint(1000000000,9999999999))
     with sqlite3.connect('data.db') as connection: 
         cursor = connection.cursor()
-        SQL = "SELECT id FROM users WHERE username=? AND password_hash=?;"
-        token = cursor.execute(SQL, (username, password)).fetchone()
-        if token == None: 
-            token = str(randint(1000000000,9999999999))
-            SQL = """INSERT INTO users (username, password_hash, token)
+        SQL = """INSERT INTO accounts (username, password, token)
             VALUES (?,?,?);"""
-            cursor.execute(SQL, (username, password, token))
+        cursor.execute(SQL, (username, password, token))
         return jsonify({"token": token})
+
+@app.route('/api/logIn', methods=["POST"])
+def logIn():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    with sqlite3.connect('data.db') as connection:
+        cursor = connection.cursor()
+        SQL = "SELECT token FROM accounts WHERE username=? AND password=?;"
+        token = cursor.execute(SQL, (username, password)).fetchone()
+        return jsonify({"token": token[0]})
 
 
 
