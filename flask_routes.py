@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json, Response
 from flask_cors import CORS
 from random import randint
 import sqlite3
@@ -107,11 +107,25 @@ def logIn():
     password = data.get('password')
     with sqlite3.connect('data.db') as connection:
         cursor = connection.cursor()
-        SQL = "SELECT token FROM accounts WHERE username=? AND password=?;"
-        token = cursor.execute(SQL, (username, password)).fetchone()
-        return jsonify({"token": token[0]})
+        SQL = "SELECT id, token FROM accounts WHERE username=? AND password=?;"
+        info = cursor.execute(SQL, (username, password)).fetchone()
+        info_json = json.dumps(info)
+        return Response(info_json)
 
 
+@app.route('/api/saveRecipe', methods=["POST"])
+def saveRecipe():
+    data = request.get_json()
+    recipe_id = data.get('recipeID')
+    recipe_title = data.get('title')
+    recipe_image = data.get('image')
+    account_id = data.get('accountID')
+    with sqlite3.connect('data.db') as connection: 
+        cursor = connection.cursor()
+        SQL = """ INSERT INTO recipes (recipe_id, recipe_title, recipe_image, account_id) 
+            VALUES (?,?,?,?);"""
+        cursor.execute(SQL, (recipe_id, recipe_title, recipe_image, account_id))
+        return jsonify({"recipe save": "success"})
 
 
 if __name__ == "__main__":

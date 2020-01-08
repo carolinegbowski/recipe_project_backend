@@ -12,17 +12,13 @@ def schema():
     CREATE_SQL_RECIPES = """
     CREATE TABLE recipes(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        recipe_api VARCHAR
+        recipe_id INTEGER,
+        recipe_image VARCHAR,
+        recipe_title VARCHAR,
+        account_id INTEGER,
+        FOREIGN KEY("account_id") REFERENCES accounts(id)
     ); """
     
-    CREATE_SQL_ACCOUNTS_RECIPES = """
-    CREATE TABLE accounts_recipes(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        account_id INTEGER,
-        recipe_id INTEGER,
-        FOREIGN KEY ("account_id") REFERENCES accounts(id),
-        FOREIGN KEY ("recipe_id") REFERENCES recipes(id)
-    ); """
 
 
     DROPSQL_ACCOUNTS = "DROP TABLE IF EXISTS accounts;"
@@ -37,8 +33,6 @@ def schema():
         cursor.execute(DROPSQL_ACCOUNTS_RECIPES)
         cursor.execute(CREATE_SQL_ACCOUNTS)
         cursor.execute(CREATE_SQL_RECIPES)
-        cursor.execute(CREATE_SQL_ACCOUNTS_RECIPES)
-
 
 if __name__ == "__main__":
     schema()
