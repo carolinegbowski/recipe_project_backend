@@ -127,6 +127,39 @@ def saveRecipe():
         cursor.execute(SQL, (recipe_id, recipe_title, recipe_image, account_id))
         return jsonify({"recipe save": "success"})
 
+@app.route('/api/popularRecipes', methods=["POST"])
+def popular_recipes():
+    if DEBUGGER == True: 
+        with open("popularRecipes.json", "r") as json_object:
+            res = json.load(json_object)
+            return jsonify({'data': res})
+    else: 
+        data = request.get_json()
+        number = data.get('number')
+        api_url = "https://api.spoonacular.com/recipes/random?apiKey={api_key}&number={number}"
+        get_url = api_url.format(api_key=token, number=number)
+        response = requests.get(get_url)
+        if response.status_code == 200:
+            res = response.json()
+            return jsonify({"data" : res})
+        else: 
+            return jsonify({"error" : "API error"})
+
+@app.route('/api/myRecipes', methods=['POST'])
+def get_my_recipes(): 
+    data = request.get_json()
+    account_id = data.get('id')
+    with sqlite3.connect('data.db') as connection: 
+        cursor = connection.cursor()
+        SQL = """ SELECT * FROM recipes WHERE account_id=?"""
+        info = cursor.execute(SQL, (account_id)).fetchall()
+        info_json = json.dumps(info)
+        print(info_json)
+        return Response(info_json)
+        
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
