@@ -152,10 +152,17 @@ def get_my_recipes():
     with sqlite3.connect('data.db') as connection: 
         cursor = connection.cursor()
         SQL = """ SELECT * FROM recipes WHERE account_id=?"""
-        info = cursor.execute(SQL, (account_id)).fetchall()
-        info_json = json.dumps(info)
-        print(info_json)
-        return Response(info_json)
+        info = cursor.execute(SQL, (account_id,)).fetchall()
+        res = []
+        for row in info:
+            data = {}
+            data['pk'] = row[0]
+            data['recipe_id'] = row[1]
+            data['image'] = row[2]
+            data['title'] = row[3]
+            res.append(data)
+        print(res)
+        return jsonify({"data": res})
         
 
 
