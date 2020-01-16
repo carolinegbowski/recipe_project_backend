@@ -98,7 +98,10 @@ def newUser():
         SQL = """INSERT INTO accounts (username, password, token)
             VALUES (?,?,?);"""
         cursor.execute(SQL, (username, password, token))
-        return jsonify({"token": token})
+        SQL = """ SELECT id, token FROM accounts WHERE username=?;"""
+        info = cursor.execute(SQL, (username, )).fetchone()
+        info_json = json.dumps(info)
+        return Response(info_json)
 
 @app.route('/api/logIn', methods=["POST"])
 def logIn():
