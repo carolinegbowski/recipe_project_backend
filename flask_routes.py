@@ -8,22 +8,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-DEBUGGER = True
-
-# @app.route('/api/login', methods=["POST"])
-# def getToken():
-#     data = request.get_json()
-#     username = data.get('username')
-#     password = data.get('password')
-#     if username and password: 
-#         with sqlite3.connect('data.db') as connection: 
-#             cursor = connection.cursor()
-#             sql = """SELECT token FROM accounts WHERE username=? AND password_hash=?"""
-#             token = cursor.execute(sql, (username, password)).fetchone()
-#             if token:
-#                 return jsonify({"token":token})
-#     return jsonify({"token": ""})
-
+DEBUGGER = False
 
 CRED_DIR = os.path.join(os.getenv('HOME'), ".credentials" )
 SP_TOKEN = "SPOONACULAR.txt"
@@ -130,6 +115,17 @@ def saveRecipe():
         cursor.execute(SQL, (recipe_id, recipe_title, recipe_image, account_id))
         return jsonify({"recipe save": "success"})
 
+@app.route('/api/unsaveRecipe', methods=["POST"])
+def unsaveRecipe():
+    data = request.get_json()
+    recipe_id = data.get('recipeID')
+    account_id = data.get('accountID')
+    with sqlite3.connect('data.db') as connection: 
+        cursor = connection.cursor()
+        SQL = """ DELETE FROM recipes WHERE recipe_id=? AND account_id=?;"""
+        cursor.execute(SQL, (recipe_id, account_id))
+        return jsonify({"recipe unsave": "success"})
+
 @app.route('/api/popularRecipes', methods=["POST"])
 def popular_recipes():
     if DEBUGGER == True: 
@@ -160,7 +156,7 @@ def get_my_recipes():
         for row in info:
             data = {}
             data['pk'] = row[0]
-            data['recipe_id'] = row[1]
+            data['id'] = row[1]
             data['image'] = row[2]
             data['title'] = row[3]
             res.append(data)
